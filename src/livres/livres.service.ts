@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLivreDto } from './dto/create-livre.dto';
+import { UpdateLivreDto } from './dto/update-livre.dto';
 
 @Injectable()
 export class LivresService {
@@ -30,11 +31,31 @@ export class LivresService {
 
     createLivre(createLivreDto: CreateLivreDto) {
         const newLivre = {
-            ...createLivreDto,
-            id: Date.now()
+            id: Date.now(),
+            ...createLivreDto
         }
         this.livres.push(newLivre);
 
         return newLivre;
+    }
+
+    updateLivre(id: number, updateLivreDto: UpdateLivreDto) {
+        this.livres = this.livres.map((livre) => {
+            if (livre.id === id) {
+                return {...livre, ...updateLivreDto}
+            }
+
+            return livre;
+        });
+
+        return this.getLivre(id);
+    }
+
+    removeLivre(id:number) {
+        const livreToRemove = this.getLivre(id);
+
+        this.livres = this.livres.filter((livre) => livre.id !== id);
+
+        return livreToRemove;
     }
 }

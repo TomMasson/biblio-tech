@@ -27,15 +27,12 @@ export class LivresController {
 
     @Put(':id')
     updateLivre(@Param('id') id:string, @Body() updatedLivreDto: UpdateLivreDto) {
-        return {
-            id,
-            titre: updatedLivreDto.titre
-        };
+        return this.livreService.updateLivre(+id, updatedLivreDto);
     }
 
     @Delete(':id')
     deleteLivre(@Param('id') id:string) {
-        return {text: 'Livre supprimé'};
+        return this.livreService.removeLivre(+id);
     }
 }
 
