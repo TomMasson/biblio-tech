@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLivreDto } from './dto/create-livre.dto';
 import { UpdateLivreDto } from './dto/update-livre.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Livre } from './entities/livre.entity';
 
 @Injectable()
 export class LivresService {
-    private livres = [
-        {id: 0, titre: 'Pot-bouille', auteur: 'Zola'},
-        {id: 1, titre: 'Germinal', auteur: 'Zola'},
-        {id: 2, titre: '20 milieux sous les maires', auteur: 'Jules Vernes'},
-        {id: 3, titre: "L'Etranger", auteur: 'Albert Camus'}
-    ]
+    constructor(
+        @InjectRepository(Livre)
+        private livreRepository: Repository<Livre>
+       ) {}
 
-    getLivres(auteur?: string) {
-        if (auteur) {
-            return this.livres.filter((livre) => livre.auteur === auteur);
-        }
+    getLivres() {
+        return this.livreRepository.find();
+    }
 
-        return this.livres;
+    getLivresByAuteurID(auteurID: number) {
+        return this.livreRepository.findBy({auteurID});
     }
 
     getLivre(id?: number) {
-        const livre = this.livres.find((livre) => livre.id === id)
+        const livre = this.livreRepository.findOne({where: {id: id}});
 
         if (!livre) {
             throw new Error("Le livre dont l'ID est "+id+" n'existe pas");
@@ -34,28 +35,23 @@ export class LivresService {
             id: Date.now(),
             ...createLivreDto
         }
-        this.livres.push(newLivre);
-
-        return newLivre;
+        return this.livreRepository.save(newLivre);
     }
 
-    updateLivre(id: number, updateLivreDto: UpdateLivreDto) {
-        this.livres = this.livres.map((livre) => {
-            if (livre.id === id) {
-                return {...livre, ...updateLivreDto}
-            }
+    async updateLivre(id: number, updateLivreDto: UpdateLivreDto) {
+        const livre = await this.livreRepository.findOne({where: {id: id}});
 
-            return livre;
-        });
+        if (livre) {
+            const newLivre = {...livre, ...updateLivreDto};
+            this.livreRepository.save(newLivre);
 
-        return this.getLivre(id);
+            return newLivre;
+        }
+
+        return null;
     }
 
-    removeLivre(id:number) {
-        const livreToRemove = this.getLivre(id);
-
-        this.livres = this.livres.filter((livre) => livre.id !== id);
-
-        return livreToRemove;
+    async removeLivre(id:number) {
+        return await this.livreRepository.delete(id).then(() => {});
     }
 }
