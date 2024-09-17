@@ -37,7 +37,8 @@ export class LivresController {
 
     // PUT /livres
     @Put(':id')
-    updateLivre(@Param('id', ParseIntPipe) id:number, @Body() updatedLivreDto: UpdateLivreDto) {
+    @UseGuards(BiblioProtechaireGuard)
+    updateLivre(@Param('id', ParseIntPipe) id:number, @Body(new ValidationPipe({skipMissingProperties: true})) updatedLivreDto: UpdateLivreDto) {
         return this.livreService.updateLivre(id, updatedLivreDto);
     }
 
