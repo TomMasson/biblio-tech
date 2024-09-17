@@ -8,9 +8,13 @@ import { BiblioProtechaireGuard } from 'src/livres/guard/biblio-protechaire.guar
 export class LivresController {
     constructor(private readonly livreService: LivresService) {}
 
-    // GET /livres(?auteur={auteurID})
+    // GET /livres/(?auteur={auteurID})
     @Get()
-    getAllLivres() {
+    getLivres(@Query('auteurID') auteurID: string) {
+        if (auteurID) {
+            return this.livreService.getLivresByAuteurID(+auteurID);
+        }
+
         return this.livreService.getLivres()
     }
 
@@ -24,27 +28,22 @@ export class LivresController {
         }
     }
 
-    //POST /livres
+    // POST /livres
     @Post()
     @UseGuards(BiblioProtechaireGuard)
     createLivre(@Body(new ValidationPipe()) createLivreDto: CreateLivreDto) {
         return this.livreService.createLivre(createLivreDto);
     }
 
+    // PUT /livres
     @Put(':id')
     updateLivre(@Param('id', ParseIntPipe) id:number, @Body() updatedLivreDto: UpdateLivreDto) {
         return this.livreService.updateLivre(id, updatedLivreDto);
     }
 
+    // DELETE /livres
     @Delete(':id')
     deleteLivre(@Param('id', ParseIntPipe) id:number) {
         return this.livreService.removeLivre(id);
     }
 }
-
-// GET /livres --> []
-// GET /livres?auteur=string --> []
-// GET /livres/:id --> {}
-// POST /livres
-// PUT /livres/:id --> {}
-// DELETE /livres/:id
