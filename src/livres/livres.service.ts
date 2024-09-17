@@ -20,7 +20,7 @@ export class LivresService {
         return this.livreRepository.findBy({auteurID});
     }
 
-    getLivre(id?: number) {
+    getLivre(id: number) {
         const livre = this.livreRepository.findOne({where: {id: id}});
 
         if (!livre) {
@@ -32,7 +32,6 @@ export class LivresService {
 
     createLivre(createLivreDto: CreateLivreDto) {
         const newLivre = {
-            id: Date.now(),
             ...createLivreDto
         }
         return this.livreRepository.save(newLivre);
@@ -52,6 +51,6 @@ export class LivresService {
     }
 
     async removeLivre(id:number) {
-        return await this.livreRepository.delete(id).then(() => {});
+        return await this.livreRepository.delete(id);
     }
 }

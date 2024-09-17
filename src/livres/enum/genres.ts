@@ -1,5 +1,5 @@
 export enum genres {
-    Histoire,
+    Fiction,
     Magie,
     Autre
 }
