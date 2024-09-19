@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 function LivresPage() {
@@ -25,11 +26,19 @@ function LivresPage() {
 			<h1>Livres</h1>
 			{livres &&
 				livres.map((livre) => {
-					const auteur = livre.auteur.nom ?? "quelqu'un";
+					const auteurNom = livre.auteur.nom ?? "quelqu'un";
+					const auteurId = livre.auteur.id ?? 0;
 					return (
 						<div key={livre.id}>
 							<p>
-								{livre.titre} écrit par {auteur}.
+								<Link href={`/livres/${livre.id}`}>
+									{livre.titre}
+								</Link>{" "}
+								écrit par{" "}
+								<Link href={`/auteurs/${auteurId}`}>
+									{auteurNom}
+								</Link>
+								.
 							</p>
 						</div>
 					);

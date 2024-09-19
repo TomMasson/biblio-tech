@@ -39,7 +39,12 @@ export class LivresService {
 
   async getLivre(id: number) {
     try {
-      const livre = await this.livreRepository.findOne({ where: { id: id } });
+      const livre = await this.livreRepository.findOne({
+        relations: {
+          auteur: true,
+        },
+        where: { id: id },
+      });
 
       if (!livre) {
         throw new NotFoundException(
