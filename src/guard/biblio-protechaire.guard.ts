@@ -11,7 +11,7 @@ export class BiblioProtechaireGuard implements CanActivate {
     // CET EXERCICE EST EFFECTUE PAR UN DEBUTANT, NE PAS REPRODUIRE
     // dans un contexte proffesionnel, il faudrait utiliser soit un token d'authenntification, soit implémenter des users avec différents droits
     if (request.query.mdp) {
-      return request.query.mdp === 'isAmBiblioProtecter';
+      return request.query.mdp === 'IAmBiblioProtecter';
     }
 
     return false;
