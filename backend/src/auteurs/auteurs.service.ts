@@ -26,7 +26,12 @@ export class AuteursService {
 
   async findAuteurById(id: number) {
     try {
-      const auteur = await this.auteurRepository.findOne({ where: { id: id } });
+      const auteur = await this.auteurRepository.findOne({
+        relations: {
+          livres: true,
+        },
+        where: { id: id },
+      });
 
       if (!auteur) {
         throw new NotFoundException(
