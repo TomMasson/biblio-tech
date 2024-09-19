@@ -1,18 +1,19 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { CreateLivreDto } from './dto/create-livre.dto';
 import { UpdateLivreDto } from './dto/update-livre.dto';
 import { LivresService } from './livres.service';
-import { BiblioProtechaireGuard } from 'src/livres/guard/biblio-protechaire.guard';
+import { BiblioProtechaireGuard } from 'src/guard/biblio-protechaire.guard';
 
 @Controller('livres')
 export class LivresController {
     constructor(private readonly livreService: LivresService) {}
 
-    // GET /livres/(?auteur={auteurID})
+    // GET /livres/(?auteur={nom})
     @Get()
-    getLivres(@Query('auteurID') auteurID: string) {
-        if (auteurID) {
-            return this.livreService.getLivresByAuteurID(+auteurID);
+    getLivres(@Query('auteur') auteur: string) {
+        if (auteur) {
+            console.log(auteur);
+            return this.livreService.getLivresByAuteur(auteur);
         }
 
         return this.livreService.getLivres()
@@ -21,17 +22,13 @@ export class LivresController {
     // GET /livres/{id}
     @Get(':id')
     getLivre(@Param('id', ParseIntPipe) id:number){
-        try {
         return this.livreService.getLivre(id);
-        } catch (error) {
-            throw new NotFoundException();
-        }
     }
 
     // POST /livres
     @Post()
     @UseGuards(BiblioProtechaireGuard)
-    createLivre(@Body(new ValidationPipe()) createLivreDto: CreateLivreDto) {
+    async createLivre(@Body(new ValidationPipe()) createLivreDto: CreateLivreDto) {
         return this.livreService.createLivre(createLivreDto);
     }
 
@@ -44,6 +41,7 @@ export class LivresController {
 
     // DELETE /livres
     @Delete(':id')
+    @UseGuards(BiblioProtechaireGuard)
     deleteLivre(@Param('id', ParseIntPipe) id:number) {
         return this.livreService.removeLivre(id);
     }
