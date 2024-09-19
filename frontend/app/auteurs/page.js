@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 function AuteursPage() {
 	const [auteurs, setAuteurs] = useState(null);
 
-	// IMPORTANT : j'ai dû utiliser un plugin sur mon navigateur : Allow CORS: Access-Control-Allow-Origin
 	useEffect(() => {
 		const fetchData = async () => {
 			const result = await fetch("http://localhost:3001/auteurs");
