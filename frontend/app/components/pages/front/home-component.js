@@ -1,4 +1,4 @@
-import Button from "../UI/button";
+import Button from "../../UI/button";
 import styles from "./home-component.module.scss";
 import Link from "next/link";
 
