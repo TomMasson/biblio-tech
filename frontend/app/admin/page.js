@@ -72,8 +72,9 @@ function AdminPage() {
 		<div className="page-livres">
 			<h1>Enregistrer un nouveau livre</h1>
 			<form className={styles.form} onSubmit={handleSubmit}>
-				<label>Titre</label>
+				<label htmlFor="titre">Titre</label>
 				<input
+					id="titre"
 					type="text"
 					name="titre"
 					placeholder="titre"
@@ -83,8 +84,9 @@ function AdminPage() {
 				{errors?.titre && (
 					<p className={styles.error}>{errors.titre}</p>
 				)}
-				<label>Auteur (ID)</label>
+				<label htmlFor="auteurId">Auteur (ID)</label>
 				<input
+					id="auteurId"
 					type="number"
 					name="auteurId"
 					placeholder="auteurId"
@@ -94,8 +96,9 @@ function AdminPage() {
 				{errors?.auteurId && (
 					<p className={styles.error}>{errors.auteurId}</p>
 				)}
-				<label>Genre</label>
+				<label htmlFor="genre">Genre</label>
 				<input
+					id="genre"
 					type="text"
 					name="genre"
 					placeholder="genre"
