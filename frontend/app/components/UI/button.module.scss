@@ -1,0 +1,28 @@
+@import "@/design/variables.scss";
+@import "@/design/theme.scss";
+@import "@/design/breakpoints.scss";
+
+.button {
+	@include styleButton;
+	padding: 30px;
+	border-radius: 5px;
+	border: 1px solid $gradient;
+	background: linear-gradient(45deg, rgba(0, 0, 0, 0) 0%, $gradient 100%);
+	transition: all 0.3s;
+	color: white;
+	text-align: center;
+	width: 180px;
+
+	&:hover {
+		border-color: white;
+		transform: scale(1.1);
+		transition: all 0.3s;
+		filter: brightness(2);
+	}
+}
+
+@include respond-to(mobile) {
+	.button {
+		width: 200px;
+	}
+}

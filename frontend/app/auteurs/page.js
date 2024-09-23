@@ -24,7 +24,6 @@ function AuteursPage() {
 			<h1>Auteurs</h1>
 			{auteurs &&
 				auteurs.map((auteur) => {
-					console.log(auteur.livres);
 					const nbLivres = auteur.livres.length;
 					return (
 						<div key={auteur.id}>

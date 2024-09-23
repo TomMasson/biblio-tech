@@ -1,0 +1,16 @@
+@import "@/design/breakpoints.scss";
+
+// la variable font est injectée depuis le layout général
+$fontTitle: var(--fontTitle);
+$fontText: var(--fontText);
+
+// couleurs
+$gradient: rgba(236, 12, 233, 0.45);
+$color1: rgb(236, 12, 233);
+$color2: yellow;
+$color3: green;
+
+// variables de taille
+$pageWidth: 70%;
+$tabletPageWidth: 80%;
+$mobilePageWidth: 95%;

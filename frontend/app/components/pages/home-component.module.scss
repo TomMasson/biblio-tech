@@ -1,0 +1,128 @@
+@import "@/design/variables.scss";
+@import "@/design/theme.scss";
+@import "@/design/breakpoints.scss";
+
+.page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	min-width: 250px;
+
+	.main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		width: 100%;
+		padding: 80px;
+		gap: 1rem;
+
+		.titleContainer {
+			width: $pageWidth;
+
+			.title {
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+				text-align: right;
+				flex-direction: column;
+				font-family: $fontTitle;
+				font-size: 6em;
+
+				.titleSuffix {
+					color: $color1;
+					font-family: $fontText;
+				}
+			}
+		}
+
+		.descContainer {
+			flex-grow: 2;
+			width: $pageWidth;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.desc {
+				@include styleTitle;
+				flex-grow: 2;
+				padding: 20px;
+			}
+		}
+
+		.navigation {
+			flex-grow: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: $pageWidth;
+
+			nav {
+				width: 100%;
+
+				.linkList {
+					list-style: none;
+					display: flex;
+					align-items: center;
+					justify-content: space-around;
+				}
+			}
+		}
+	}
+}
+
+@include respond-to(tablet) {
+	.page {
+		.main {
+			padding: 30px;
+
+			justify-content: space-around;
+
+			.titleContainer {
+				width: $tabletPageWidth;
+
+				.title {
+					font-size: 5em;
+				}
+			}
+
+			.descContainer {
+				flex-grow: unset;
+			}
+
+			.navigation {
+				flex-grow: unset;
+			}
+		}
+	}
+}
+
+@include respond-to(mobile) {
+	.page {
+		.main {
+			padding: 10px;
+			justify-content: space-around;
+
+			.titleContainer {
+				width: $mobilePageWidth;
+
+				.title {
+					font-size: 4em;
+				}
+			}
+
+			.descContainer {
+				width: 85%;
+			}
+
+			.navigation {
+				.linkList {
+					flex-direction: column;
+					gap: 15px;
+				}
+			}
+		}
+	}
+}
