@@ -19,25 +19,6 @@
 		padding: 80px;
 		gap: 1rem;
 
-		.titleContainer {
-			width: $pageWidth;
-
-			.title {
-				display: flex;
-				align-items: flex-end;
-				justify-content: center;
-				text-align: right;
-				flex-direction: column;
-				font-family: $fontTitle;
-				font-size: 6em;
-
-				.titleSuffix {
-					color: $color1;
-					font-family: $fontText;
-				}
-			}
-		}
-
 		.descContainer {
 			flex-grow: 2;
 			width: $pageWidth;

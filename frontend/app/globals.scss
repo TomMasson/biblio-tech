@@ -39,4 +39,9 @@ body {
 a {
 	color: $color1;
 	text-decoration: none;
+	cursor: pointer;
+
+	&:hover {
+		color: $color3;
+	}
 }

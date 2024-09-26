@@ -18,7 +18,7 @@ const AuteursComponent = () => {
 		fetchData();
 	}, []);
 
-	const headers = ["Nom", "Livres en notre possétion", "Actions"];
+	const headers = ["Nom", "Livres en notre possession", "Actions"];
 	const items = auteurs
 		? auteurs.map((auteur) => {
 				console.log(auteur);

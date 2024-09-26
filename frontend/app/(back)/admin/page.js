@@ -1,4 +1,4 @@
-import NewPageComponent from "../../components/pages/admin/new-page-component";
+import NewPageComponent from "@/components/pages/admin/new-page-component";
 
 function AdminPage() {
 	return <NewPageComponent />;

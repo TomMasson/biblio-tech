@@ -1,11 +1,11 @@
 @import "@/design/variables.scss";
 
 @mixin styleTitle {
-	font-style: $fontTitle;
+	font-family: $fontTitle;
 	font-size: 2em;
 }
 
 @mixin styleButton {
-	font-style: $fontText;
+	font-family: $fontText;
 	font-size: 1.5em;
 }
