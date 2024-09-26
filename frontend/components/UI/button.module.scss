@@ -9,12 +9,12 @@
 	border: 1px solid $gradient;
 	background: linear-gradient(45deg, rgba(0, 0, 0, 0) 0%, $gradient 100%);
 	transition: all 0.3s;
-	color: white;
+	color: $color2;
 	text-align: center;
 	width: 180px;
 
 	&:hover {
-		border-color: white;
+		border-color: $color2;
 		transform: scale(1.1);
 		transition: all 0.3s;
 		filter: brightness(2);

@@ -1,0 +1,37 @@
+@import "@/design/variables.scss";
+@import "@/design/theme.scss";
+
+.header {
+	background-color: #1e1e1e;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+
+	.titleContainer {
+		.title {
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			text-align: right;
+			flex-direction: column;
+			font-family: $fontTitle;
+			font-size: 6em;
+
+			.titleSuffix {
+				color: $color1;
+				font-family: $fontText;
+			}
+		}
+	}
+}
+.links {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	list-style: none;
+	@include styleTitle;
+
+	.link {
+		padding: 50px 30px;
+	}
+}

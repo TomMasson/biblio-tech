@@ -1,0 +1,29 @@
+@import "@/design/variables.scss";
+
+.container {
+	width: 60%;
+	margin: auto;
+	border-radius: 8px;
+	.muiTableContainer {
+		border: solid 1px $color2;
+		background: #1e1e1e;
+
+		.tableHead {
+			background: black;
+
+			.header {
+				color: $color2;
+			}
+		}
+
+		.tableCell {
+			color: $color2;
+		}
+
+		& .actions {
+			display: flex;
+			justify-content: center;
+			gap: 1rem;
+		}
+	}
+}

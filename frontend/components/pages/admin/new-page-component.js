@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { livreSchema } from "./Validations/LivreValidation";
-import styles from "./page.module.scss";
+import styles from "./new-page-component.module.scss";
 
-function AdminPage() {
+import { useState } from "react";
+import { livreSchema } from "../../Form/Validations/LivreValidation";
+import CreateForm from "../../Form/create-form";
+
+const NewPageComponent = () => {
 	const [formData, setFormData] = useState({
 		titre: "",
 		auteurId: "",
@@ -71,53 +73,19 @@ function AdminPage() {
 	return (
 		<div className="page-livres">
 			<h1>Enregistrer un nouveau livre</h1>
-			<form className={styles.form} onSubmit={handleSubmit}>
-				<label htmlFor="titre">Titre</label>
-				<input
-					id="titre"
-					type="text"
-					name="titre"
-					placeholder="titre"
-					value={formData.titre}
-					onChange={updateForm}
-				/>
-				{errors?.titre && (
-					<p className={styles.error}>{errors.titre}</p>
-				)}
-				<label htmlFor="auteurId">Auteur (ID)</label>
-				<input
-					id="auteurId"
-					type="number"
-					name="auteurId"
-					placeholder="auteurId"
-					value={formData.auteurId}
-					onChange={updateForm}
-				/>
-				{errors?.auteurId && (
-					<p className={styles.error}>{errors.auteurId}</p>
-				)}
-				<label htmlFor="genre">Genre</label>
-				<input
-					id="genre"
-					type="text"
-					name="genre"
-					placeholder="genre"
-					value={formData.genre}
-					onChange={updateForm}
-				/>
-				{errors?.genre && (
-					<p className={styles.error}>{errors.genre}</p>
-				)}
+			<CreateForm
+				submitForm={handleSubmit}
+				updateField={updateForm}
+				data={formData}
+				errors={errors}
+			/>
 
-				<button>Envoyer</button>
-
-				{response?.error && (
-					<p className={styles.error}>{response.error}</p>
-				)}
-				{response?.success && <p>{response.success}</p>}
-			</form>
+			{response?.error && (
+				<p className={styles.error}>{response.error}</p>
+			)}
+			{response?.success && <p>{response.success}</p>}
 		</div>
 	);
-}
+};
 
-export default AdminPage;
+export default NewPageComponent;

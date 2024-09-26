@@ -1,0 +1,25 @@
+@import "@/design/variables.scss";
+
+.titleContainer {
+	width: $pageWidth;
+
+	.title {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		text-align: right;
+		flex-direction: column;
+		font-family: $fontTitle;
+		font-size: 6em;
+
+		.titleSuffix {
+			color: $color1;
+			font-family: $fontText;
+		}
+	}
+
+	.smallTitle {
+		@extend .title;
+		font-size: 4em;
+	}
+}

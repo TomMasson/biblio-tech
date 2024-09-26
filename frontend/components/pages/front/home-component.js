@@ -1,4 +1,5 @@
-import Button from "../UI/button";
+import LogoComponent from "@/components/UI/logo";
+import Button from "../../UI/button";
 import styles from "./home-component.module.scss";
 import Link from "next/link";
 
@@ -6,12 +7,7 @@ const HomeComponent = () => {
 	return (
 		<div className={styles.page}>
 			<main className={styles.main}>
-				<div className={styles.titleContainer}>
-					<h1 className={styles.title}>
-						<span>La Biblio</span>
-						<span className={styles.titleSuffix}>Tech</span>
-					</h1>
-				</div>
+				<LogoComponent />
 				<div className={styles.descContainer}>
 					<h3 className={styles.desc}>
 						Ici vous pouvez consulter nos livres & auteurs,
