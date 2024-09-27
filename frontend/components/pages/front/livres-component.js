@@ -2,7 +2,6 @@
 
 import TableComponent from "@/components/UI/table";
 import { useEffect, useState } from "react";
-import styles from "./livres-component.module.scss";
 import Link from "next/link";
 
 const LivresComponent = () => {
@@ -18,10 +17,34 @@ const LivresComponent = () => {
 		fetchData();
 	}, []);
 
+	const deleteLivre = async (livreId) => {
+		const result = await fetch(
+			`http://localhost:3001/livres/${livreId}/?mdp=IAmBiblioProtecter`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		const jsonResult = await result.json();
+
+		if (jsonResult.affected === 1) {
+			const updatedLivres = livres.filter((livre) => {
+				if (livre.id === livreId) {
+					alert(`Le livre ${livre.titre} a bien été supprimé`); // @evol : créer un composant 'notif' avec une durée de vie (5 sec par exemple)
+				} else {
+					return livre;
+				}
+			});
+			setLivres(updatedLivres);
+		}
+	};
+
 	const headers = ["Titre", "Auteur", "Actions"];
 	const items = livres
 		? livres.map((livre) => {
-				const auteurNom = livre.auteur.nom ?? "quelqu'un";
+				const auteurNom = livre.auteur.nom ?? "anonyme";
 				const auteurId = livre.auteur.id ?? 0;
 
 				return {
@@ -37,7 +60,9 @@ const LivresComponent = () => {
 							</Link>
 						</p>
 					),
-					actions: { edit: "editUrl", delete: "deleteUrl" },
+					url: {
+						edit: `/admin/livres/${livre.id}`,
+					},
 				};
 		  })
 		: null;
@@ -47,10 +72,11 @@ const LivresComponent = () => {
 	}
 
 	return (
-		<div className={styles.pageLivres}>
-			<h1 className={styles.titre}>Livres</h1>
-			<TableComponent headers={headers} items={items} />
-		</div>
+		<TableComponent
+			headers={headers}
+			items={items}
+			deleteAction={deleteLivre}
+		/>
 	);
 };
 

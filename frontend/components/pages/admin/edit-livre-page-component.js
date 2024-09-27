@@ -1,30 +1,52 @@
 "use client";
 
-import styles from "./new-page-component.module.scss";
+import LivreForm from "@/components/Form/livre-form";
+import { livreSchema } from "@/components/Form/Validations/LivreValidation";
+import { useEffect, useState } from "react";
+import ErrorNotif from "@/components/Form/error";
 
-import { useState } from "react";
-import { livreSchema } from "../../Form/Validations/LivreValidation";
-import LivreForm from "../../Form/livre-form";
-
-const NewPageComponent = () => {
+const EditLivrePageComponent = ({ livreId }) => {
 	const [formData, setFormData] = useState({
 		titre: "",
 		auteurId: "",
 		genre: "",
 	});
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await fetch(
+				`http://localhost:3001/livres/${livreId}`
+			);
+			const jsonResult = await result.json();
+
+			if (!jsonResult.error) {
+				setFormData({
+					titre: jsonResult.titre,
+					auteurId: jsonResult.auteurId,
+					genre: jsonResult.genre,
+				});
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	const [errors, setErrors] = useState();
 	const [response, setResponse] = useState();
 
 	const submitLivre = async (formData) => {
 		formData.auteurId = parseInt(formData.auteurId);
 
-		await fetch("http://localhost:3001/livres?mdp=IAmBiblioProtecter", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(formData),
-		})
+		await fetch(
+			`http://localhost:3001/livres/${livreId}?mdp=IAmBiblioProtecter`,
+			{
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			}
+		)
 			.then(async (result) => {
 				const jsonResult = await result.json();
 
@@ -33,10 +55,10 @@ const NewPageComponent = () => {
 				} else {
 					setResponse({
 						success:
-							"Le livre " + jsonResult.titre + " a été ajouté.",
+							"Le livre " +
+							jsonResult.titre +
+							" a bien été modifié.",
 					});
-
-					setFormData({ titre: "", auteurId: "", genre: "" });
 				}
 			})
 			.catch((error) => {
@@ -53,8 +75,10 @@ const NewPageComponent = () => {
 			setErrors({});
 		} catch (error) {
 			const newErrors = {};
+			console.log(error);
 
 			error.inner.forEach((error) => {
+				console.log("e", error);
 				newErrors[error.path] = error.message;
 			});
 
@@ -85,4 +109,4 @@ const NewPageComponent = () => {
 	);
 };
 
-export default NewPageComponent;
+export default EditLivrePageComponent;

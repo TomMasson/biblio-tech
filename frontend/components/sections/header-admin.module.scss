@@ -1,0 +1,12 @@
+@import "@/design/variables.scss";
+@import "@/design/theme.scss";
+
+.disclaimer {
+	background-color: $gradient;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	color: $color2;
+
+	@include styleTitle;
+}

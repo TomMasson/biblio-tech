@@ -5,7 +5,7 @@
 	background-color: #1e1e1e;
 	display: flex;
 	justify-content: space-between;
-	padding: 10px;
+	padding: 10px 30px;
 
 	.titleContainer {
 		.title {
@@ -29,9 +29,10 @@
 	align-items: center;
 	justify-content: flex-start;
 	list-style: none;
+	gap: 50px;
 	@include styleTitle;
 
-	.link {
-		padding: 50px 30px;
+	.link:hover {
+		transform: scale(1.1);
 	}
 }

@@ -2,7 +2,6 @@
 
 import TableComponent from "@/components/UI/table";
 import { useEffect, useState } from "react";
-import styles from "./auteurs-component.module.scss";
 import Link from "next/link";
 
 const AuteursComponent = () => {
@@ -18,10 +17,33 @@ const AuteursComponent = () => {
 		fetchData();
 	}, []);
 
+	const deleteAuteur = async (auteurId) => {
+		const result = await fetch(
+			`http://localhost:3001/auteurs/${auteurId}/?mdp=IAmBiblioProtecter`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		const jsonResult = await result.json();
+
+		if (jsonResult.affected === 1) {
+			const updatedAuteurs = auteurs.filter((auteur) => {
+				if (auteur.id === auteurId) {
+					alert(`L'auteur ${auteur.nom} a bien été supprimé`); // @evol : créer un composant 'notif' avec une durée de vie (5 sec par exemple)
+				} else {
+					return auteur;
+				}
+			});
+			setAuteurs(updatedAuteurs);
+		}
+	};
+
 	const headers = ["Nom", "Livres en notre possession", "Actions"];
 	const items = auteurs
 		? auteurs.map((auteur) => {
-				console.log(auteur);
 				return {
 					id: auteur.id,
 					data1: (
@@ -37,7 +59,9 @@ const AuteursComponent = () => {
 							{auteur.livres.length > 1 ? "s" : null}
 						</Link>
 					),
-					actions: { edit: "editUrl", delete: "deleteUrl" },
+					url: {
+						edit: `/admin/auteurs/${auteur.id}`,
+					},
 				};
 		  })
 		: null;
@@ -47,10 +71,11 @@ const AuteursComponent = () => {
 	}
 
 	return (
-		<div className={styles.pageAuteurs}>
-			<h1 className={styles.titre}>Auteurs</h1>
-			<TableComponent headers={headers} items={items} />
-		</div>
+		<TableComponent
+			headers={headers}
+			items={items}
+			deleteAction={deleteAuteur}
+		/>
 	);
 };
 

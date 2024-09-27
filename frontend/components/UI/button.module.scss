@@ -13,6 +13,10 @@
 	text-align: center;
 	width: 180px;
 
+	&.fullWidth {
+		width: 100%;
+	}
+
 	&:hover {
 		border-color: $color2;
 		transform: scale(1.1);
