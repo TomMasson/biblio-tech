@@ -20,7 +20,11 @@ const EditLivrePageComponent = ({ livreId }) => {
 			const jsonResult = await result.json();
 
 			if (!jsonResult.error) {
-				setFormData(jsonResult);
+				setFormData({
+					titre: jsonResult.titre,
+					auteurId: jsonResult.auteurId,
+					genre: jsonResult.genre,
+				});
 			}
 		};
 
@@ -55,8 +59,6 @@ const EditLivrePageComponent = ({ livreId }) => {
 							jsonResult.titre +
 							" a bien été modifié.",
 					});
-
-					setFormData({ titre: "", auteurId: "", genre: "" });
 				}
 			})
 			.catch((error) => {

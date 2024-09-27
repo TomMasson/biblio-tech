@@ -1,0 +1,17 @@
+@import "@/design/variables.scss";
+@import "@/design/theme.scss";
+
+.label {
+	font-size: 1.5rem;
+}
+
+.input {
+	border: solid 1px $gradient;
+	padding: 10px;
+
+	@include styleButton;
+}
+
+.error {
+	color: red;
+}

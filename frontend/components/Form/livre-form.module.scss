@@ -1,11 +1,11 @@
 .form {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
 	width: 20%;
 	margin: auto;
 
-	.error {
-		color: red;
+	.inputs {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-bottom: 50px;
 	}
 }

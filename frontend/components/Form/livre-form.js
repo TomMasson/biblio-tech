@@ -1,42 +1,43 @@
+import Button from "../UI/button";
+import Input from "../UI/input";
 import styles from "./livre-form.module.scss";
 
 const LivreForm = ({ submitForm, updateField, data, errors }) => {
 	return (
 		<form className={styles.form} onSubmit={submitForm}>
-			<label htmlFor="titre">Titre</label>
-			<input
-				id="titre"
-				type="text"
-				name="titre"
-				placeholder="titre"
-				value={data.titre}
-				onChange={updateField}
-			/>
-			{errors?.titre && <p className={styles.error}>{errors.titre}</p>}
-			<label htmlFor="auteurId">Auteur (ID)</label>
-			<input
-				id="auteurId"
-				type="number"
-				name="auteurId"
-				placeholder="auteurId"
-				value={data.auteurId}
-				onChange={updateField}
-			/>
-			{errors?.auteurId && (
-				<p className={styles.error}>{errors.auteurId}</p>
-			)}
-			<label htmlFor="genre">Genre</label>
-			<input
-				id="genre"
-				type="text"
-				name="genre"
-				placeholder="genre"
-				value={data.genre}
-				onChange={updateField}
-			/>
-			{errors?.genre && <p className={styles.error}>{errors.genre}</p>}
-
-			<button>Envoyer</button>
+			<div className={styles.inputs}>
+				<Input
+					label={"Titre"}
+					id="titre"
+					type="text"
+					name="titre"
+					placeholder="Titre"
+					value={data.titre}
+					onChange={updateField}
+					error={errors?.titre ?? null}
+				/>
+				<Input
+					label={"Auteur ID"}
+					id="auteurId"
+					type="number"
+					name="auteurId"
+					placeholder="AuteurId"
+					value={data.auteurId}
+					onChange={updateField}
+					error={errors?.auteurId ?? null}
+				/>
+				<Input
+					label={"Genre"}
+					id="genre"
+					type="text"
+					name="genre"
+					placeholder="Genre"
+					value={data.genre}
+					onChange={updateField}
+					error={errors?.genre ?? null}
+				/>
+			</div>
+			<Button fullWidth={true}>Envoyer</Button>
 		</form>
 	);
 };
