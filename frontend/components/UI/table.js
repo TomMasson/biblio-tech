@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }));
 
-const TableComponent = ({ headers, items }) => {
+const TableComponent = ({ headers, items, deleteAction }) => {
 	return (
 		<div className={styles.container}>
 			<TableContainer
@@ -81,12 +81,16 @@ const TableComponent = ({ headers, items }) => {
 										className={`${styles.tableCell} ${styles.actions}`}
 										align="center"
 									>
-										<Link href={item.actions.edit}>
+										<Link href={item.url.edit}>
 											<EditIcon />
 										</Link>
-										<Link href={item.actions.delete}>
+										<button
+											onClick={() =>
+												deleteAction(item.id)
+											}
+										>
 											<DeleteForeverIcon />
-										</Link>
+										</button>
 									</StyledTableCell>
 								</StyledTableRow>
 							);

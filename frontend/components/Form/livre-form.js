@@ -1,6 +1,6 @@
-import styles from "./create-form.module.scss";
+import styles from "./livre-form.module.scss";
 
-const CreateForm = ({ submitForm, updateField, data, errors }) => {
+const LivreForm = ({ submitForm, updateField, data, errors }) => {
 	return (
 		<form className={styles.form} onSubmit={submitForm}>
 			<label htmlFor="titre">Titre</label>
@@ -41,4 +41,4 @@ const CreateForm = ({ submitForm, updateField, data, errors }) => {
 	);
 };
 
-export default CreateForm;
+export default LivreForm;
