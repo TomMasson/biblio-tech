@@ -3,7 +3,7 @@
 
 ## Description
 
-Ce projet a but pédagogique cherche a créer un système de stockage & d'emprunt de livres
+Ce projet, a but pédagogique, cherche a créer un système de stockage & d'emprunt de livres. L'objectif est d'implémenter un Back (le plus simple possible, 1er pas avec Nest) et un front fluide (validation des acquis sur NextJs)
 
 ## SOCLE TECHNIQUE
 
